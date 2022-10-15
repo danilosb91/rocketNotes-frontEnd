@@ -5,14 +5,14 @@ import GlobalStyles from './Styles/global'
 
 import theme from  './Styles/theme'
 
-import { Home } from './Pages/Home'
+import { SingIn } from './Pages/SingIn'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme} >
     <GlobalStyles/>
-        <Home />
+        <SingIn />
    
     </ThemeProvider>
   </React.StrictMode>
