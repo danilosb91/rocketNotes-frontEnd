@@ -27,13 +27,13 @@ export const Form = styled.form`
         margin: 48px;
         }
 
-    >p{
+        >p{
             font-size: 14px;
         color: ${({ theme }) => theme.COLORS.GRAY_100};
 
         }
 
-    >a{
+        >a{
             margin-top: 124px;
         color: ${({ theme }) => theme.COLORS.ORANGE};
 
