@@ -1,19 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import{ ThemeProvider } from 'styled-components'
-import GlobalStyles from './Styles/global'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "./Styles/global";
 
-import theme from  './Styles/theme'
+import theme from "./Styles/theme";
 
-import {Profile} from './Pages/Profile'
+import { New } from "./Pages/New";
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme} >
-    <GlobalStyles/>
-        <Profile />
-   
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <New />
     </ThemeProvider>
   </React.StrictMode>
-)
+);
