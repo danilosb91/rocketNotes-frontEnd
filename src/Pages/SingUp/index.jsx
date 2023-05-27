@@ -1,8 +1,10 @@
-import { Container, Form, Background } from "./styles";
+import { FiMail, FiLock, FiUser } from 'react-icons/fi'
+import { Link } from 'react-router-dom';
+
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 
-import { FiMail, FiLock, FiUser } from 'react-icons/fi'
+import { Container, Form, Background } from "./styles";
 
 export function SingUp(){
     return(
@@ -31,7 +33,7 @@ export function SingUp(){
                 
                 <Button title="Cadastrar" />
 
-            <a href="#">Voltar para o Login</a>
+            <Link to="/">Voltar para o Login</Link>
               
             </Form>
 
