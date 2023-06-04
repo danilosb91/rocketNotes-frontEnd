@@ -1,37 +1,56 @@
-import { FiMail, FiLock } from 'react-icons/fi'
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { FiMail, FiLock } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
-import { Input } from '../../components/Input'
-import { Button } from '../../components/Button'
+import { useAuth } from "../../hooks/auth";
+
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
 import { Container, Form, Background } from "./styles";
 
-export function SingIn(){
-    return(
-        <Container>
-            <Form>
-                <h1>Rocket Notes</h1>
-                <p>Aplicação para Salvar e gerenciar seus links</p>
+export function SingIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-                <h2>Faça seu login</h2>
+  const data = useAuth();
+  console.log("danilo",data);
 
-                <Input 
-                placeholder="Email"
-                type="text"
-                icon={FiMail}/>
-                
-                <Input 
-                placeholder="Senha"
-                type="Password"
-                icon={FiLock}/>
-                
-                <Button title="Entrar" />
+ const { singIn } = useAuth();
 
-            <Link to="/register">Criar conta</Link>
-              
-            </Form>
-<Background/>
+   function handleSingIn() {
+     singIn({ email, password });
+  }
 
-        </Container>
-    )
+  return (
+    <Container>
+      <Form>
+        <h1>Rocket Notes</h1>
+        <p>Aplicação para Salvar e gerenciar seus links</p>
+
+        <h2>Faça seu login</h2>
+
+        <Input
+          placeholder="Email"
+          type="text"
+          icon={FiMail}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <Input
+          placeholder="Senha"
+          type="Password"
+          icon={FiLock}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <Button title="Entrar" />
+
+        <Link to="/register" onClick={handleSingIn}>
+          Criar conta
+        </Link>
+      </Form>
+      <Background />
+    </Container>
+  );
 }
