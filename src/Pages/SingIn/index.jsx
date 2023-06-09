@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { Container, Form, Background } from "./styles";
 import { FiMail, FiLock } from "react-icons/fi";
-import { Link } from "react-router-dom";
-
-import { useAuth } from "../../hooks/auth";
-
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
-import { Container, Form, Background } from "./styles";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
+import { useState } from "react";
 
 export function SingIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const data = useAuth();
-  console.log("danilo",data);
+  const { singIn } = useAuth();
 
- const { singIn } = useAuth();
+  
+  
 
-   function handleSingIn() {
-     singIn({ email, password });
+  function handleSingIn() {
+
+    singIn({ email, password });
+  
   }
 
   return (
@@ -44,11 +44,9 @@ export function SingIn() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button title="Entrar" />
+        <Button title="Entrar" onClick={handleSingIn} />
 
-        <Link to="/register" onClick={handleSingIn}>
-          Criar conta
-        </Link>
+        <Link to="/register">Criar conta</Link>
       </Form>
       <Background />
     </Container>
