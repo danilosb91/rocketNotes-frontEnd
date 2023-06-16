@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import { FiPlus } from "react-icons/fi";
 import { Note } from "../../components/Note";
 
@@ -6,8 +8,15 @@ import { Header } from "../../components/Header";
 import { Section } from "../../components/Section";
 import { ButtonText } from "../../components/ButtonText";
 import { Container, Brand, Menu, Search, Content, NewNote } from "./styles";
+import { useState } from "react";
 
 export function Home() {
+  const [ tags, setTags ] = useState("");
+
+
+    useEffect(() => {
+      
+    },[]);
   return (
     <Container>
       <Brand>
