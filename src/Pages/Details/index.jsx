@@ -1,4 +1,5 @@
 import { Container, Links, Content } from "./style";
+import { useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
@@ -6,6 +7,7 @@ import { Section } from "../../components/Section";
 import { Tag } from "../../components/Tag";
 
 export function Details() {
+  const params = useParams();
   return (
     <Container>
       <Header />
