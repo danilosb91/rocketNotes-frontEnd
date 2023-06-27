@@ -1,5 +1,8 @@
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
+
 import { Container, Links, Content } from "./style";
-import { useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
@@ -7,45 +10,66 @@ import { Section } from "../../components/Section";
 import { Tag } from "../../components/Tag";
 
 export function Details() {
+  const [data, setData] = useState(null);
+
   const params = useParams();
+  const navigate = useNavigate();
+
+  function handleBack() {
+    navigate(-1);
+  }
+
+  async function handleRemove() {
+    const confirm = window.confirm("Deseja Realmente Remover a Nota?");
+
+    if (confirm) {
+      await api.delete(`/notes/${params.id}`);
+      navigate(-1);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchNote() {
+      const response = await api.get(`/notes/${params.id}`);
+      setData(response.data);
+    }
+
+    fetchNote();
+  }, []);
   return (
     <Container>
       <Header />
+      {data && (
+        <main>
+          <Content>
+            <ButtonText title="Excluir Nota" onClick={handleRemove} />
 
-      <main>
-        <Content>
-          <ButtonText title="Excluir Nota" />
+            <h1>{data.title}</h1>
+            <p>{data.description}</p>
+            {data.links && (
+              <Section title="Links úteis">
+                <Links>
+                  {data.links.map((link) => (
+                    <li key={String(link.id)}>
+                      <a href={link.url}>{link.url}</a>
+                    </li>
+                  ))}
+                </Links>
+              </Section>
+            )}
 
-          <h1>Introdução ao React</h1>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est,
-            assumenda veniam placeat exercitationem eius sed vero quo animi
-            aperiam doloremque modi reiciendis officia, unde eligendi qui optio?
-            Sapiente, fugiat pariatur. Lorem ipsum dolor sit, amet consectetur
-            adipisicing elit. Est, assumenda veniam placeat exercitationem eius
-            sed vero quo animi aperiam doloremque modi reiciendis officia, unde
-            eligendi qui optio? Sapiente, fugiat pariatur.
-          </p>
+            {data.tags && (
+              <Section title="Marcadores">
+                {data.tags.map((tag) => (
+                  <Tag key={String(tag.id)} title={tag.name} />
+                ))}
+              </Section>
+            )}
 
-          <Section title="Links úteis">
-            <Links>
-              <li>
-                <a href="#">https://www.rocketseat.com.br/</a>
-              </li>
-              <li>
-                <a href="#">https://www.rocketseat.com.br/</a>
-              </li>
-            </Links>
-          </Section>
-
-          <Section title="Marcadores">
-            <Tag title="Express" />
-            <Tag title="Note" />
-          </Section>
-
-          <Button title="Voltar" />
-        </Content>
-      </main>
+            <Button title="Voltar" onClick={handleBack} />
+          </Content>
+        </main>
+      )}
     </Container>
   );
 }
