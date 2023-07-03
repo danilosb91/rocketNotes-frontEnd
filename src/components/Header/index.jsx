@@ -5,6 +5,8 @@ import { api } from "../../services/api";
 
 import { Container, Profile, Logout } from "./styles";
 
+import avatarPlaceholder from "../../assets/avatar.svg"
+
 export function Header() {
   const { singOut, user } = useAuth();
 
